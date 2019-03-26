@@ -1,0 +1,61 @@
+<div class="row justify-content-md-start">
+    <div class="col-7">
+        <table class="table table-bordered table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Category Name</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Create Time</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="cate in categories">
+                    <th scope="row">{{$index + 1}}</th>
+                    <td>{{cate.category_name}}</td>
+                    <td>{{cate.status === 1 ? "Action" : "UnAction"}}</td>
+                    <td>{{cate.create_time | date: 'dd-MM-yyyy'}}</td>
+                    <th>
+                        <button type="button" class="btn btn-primary btn-sm"
+                            ng-click="selectCategory(cate)">Select</button>
+                        <button type="button" class="btn btn-danger btn-sm"
+                            ng-click="deleteCategory(cate)">Delete</button>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-5">
+        <br />
+        <form>
+            <div class="form-group">
+                <label for="exampleCategoryName">Category Name</label>
+                <input type="text" class="form-control"
+                    ng-class="{'is-valid' : submitTime > 0 && !lsError.category_name, 'is-invalid' : lsError.category_name}"
+                    id="exampleCategoryName" aria-describedby="categoryName" placeholder="Category Name"
+                    ng-model="data.category_name">
+                <small class="form-text text-muted"
+                    ng-class="{'text-muted' : submitTime === 0,'text-success' : submitTime > 0 && !lsError.category_name,'text-danger' : lsError.category_name}">Category
+                    Name is not empty.</small>
+                <div class="invalid-feedback" ng-repeat="error in lsError.category_name">
+                    {{error.msg}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleDescription">Description</label>
+                <textarea class="form-control" id="exampleDescription" rows="3" placeholder="Description"
+                    ng-model="data.description" ng-class="{'is-valid' : submitTime > 0 && !lsError.description, 'is-invalid' : lsError.description}"></textarea>
+                <div class="invalid-feedback" ng-repeat="error in lsError.description">
+                    {{error.msg}}
+                </div>
+            </div>
+            <div class="form-group custom-control custom-checkbox mr-sm-2">
+                <input type="checkbox" class="custom-control-input" id="customControlAutosizing" ng-model="data.status">
+                <label class="custom-control-label" for="customControlAutosizing">Status</label>
+            </div>
+            <button type="submit" class="btn btn-primary" ng-click="createCategory(data)">Submit</button>
+            <button type="submit" class="btn btn-dark" ng-click="reset()">Reset</button>
+        </form>
+    </div>
+</div>

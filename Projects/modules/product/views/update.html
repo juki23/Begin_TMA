@@ -1,0 +1,77 @@
+<form>
+    <br />
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label>Product Name</label>
+            <input type="text" class="form-control" placeholder="First name"
+                ng-class="{'is-valid' : submitTime > 0 && !lsError.product_name, 'is-invalid' : lsError.product_name}"
+                ng-model="data.product_name">
+            <small class="form-text text-muted"
+                ng-class="{'text-muted' : submitTime === 0,'text-success' : submitTime > 0 && !lsError.product_name,'text-danger' : lsError.product_name}">
+                Product Name is not empty.</small>
+            <div class="invalid-feedback" ng-repeat="error in lsError.product_name">
+                {{error.msg}}
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="exampleFormControlSelect1">Category</label>
+            <select class="form-control" id="exampleFormControlSelect1" ng-model="data.category"
+                ng-class="{'is-valid' : submitTime > 0 && !lsError.category, 'is-invalid' : lsError.category}">
+                <option value="">--- Choose Category ---</option>
+                <option ng-repeat="cate in listCategories" value="{{cate.id}}">{{cate.category_name}}</option>
+            </select>
+            <small class="form-text text-muted"
+                ng-class="{'text-muted' : submitTime === 0,'text-success' : submitTime > 0 && !lsError.category,'text-danger' : lsError.category}">
+                Category is not empty.</small>
+            <div class="invalid-feedback" ng-repeat="error in lsError.category">
+                {{error.msg}}
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label for="validationServer02">Price</label>
+            <input type="text" class="form-control" ng-model="data.price" placeholder="Price"
+                ng-class="{'is-valid' : submitTime > 0 && !lsError.price, 'is-invalid' : lsError.price}">
+            <small class="form-text text-muted"
+                ng-class="{'text-muted' : submitTime === 0,'text-success' : submitTime > 0 && !lsError.price,'text-danger' : lsError.price}">
+                Product price is not empty, Example: 500, 25.500, 100.000,...</small>
+            <div class="invalid-feedback" ng-repeat="error in lsError.price">
+                {{error.msg}}
+            </div>
+        </div>
+        <div class="col-md-8 mb-3">
+            <label for="validationServer04">Image</label>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile" ng-model="data.image"
+                    ng-class="{'is-valid' : submitTime > 0 && !lsError.image, 'is-invalid' : lsError.image}">
+                <label class="custom-file-label form-control-file" for="customFile">Choose file</label>
+                <div class="invalid-feedback" ng-repeat="error in lsError.image">
+                    {{error.msg}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="validationServer03">Description</label>
+            <textarea class="form-control" id="validationServer03" rows="3" placeholder="Description"
+                ng-model="data.description"
+                ng-class="{'is-valid' : submitTime > 0 && !lsError.description, 'is-invalid' : lsError.description}">
+            </textarea>
+            <div class="invalid-feedback" ng-repeat="error in lsError.description">
+                {{error.msg}}
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="custom-control custom-checkbox mr-sm-2">
+            <input type="checkbox" class="custom-control-input" id="customControlAutosizing" ng-model="data.status">
+            <label class="custom-control-label" for="customControlAutosizing">Agree to let the product work</label>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit" ng-click="saveProduct(data)">
+        {{ data.id ? 'Update' : 'Create'}} Product
+    </button>
+    <a ui-sref="authentication.product.list" class="btn btn-dark">Back to Product List</a>
+</form>

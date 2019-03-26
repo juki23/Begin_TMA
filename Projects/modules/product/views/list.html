@@ -1,0 +1,29 @@
+<table class="table table-bordered table-dark">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Category</th>
+            <th scope="col">Status</th>
+            <th scope="col">Create Time</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="product in lsProd">
+            <th scope="row">{{((currentPage - 1) * pageSize) + ($index + 1)}}</th>
+            <td>{{product.product_name}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.category_name}}</td>
+            <td>{{product.status ? 'Active' : 'UnActive'}}</td>
+            <td>{{product.create_time | date: 'dd-MM-yyyy'}}</td>
+            <th>
+                <button type="button" class="btn btn-primary btn-sm" ng-click="selectProduct(product.id)">Update</button>
+                <button type="button" class="btn btn-danger btn-sm" ng-click="deleteProduct(product.id)">Delete</button>
+            </th>
+        </tr>
+    </tbody>
+</table>
+<ul class="pagination" uib-pagination direction-links="false" total-items="totalItems"
+ ng-model="currentPage" items-per-page="pageSize" ng-change="pageChanged()"></ul>

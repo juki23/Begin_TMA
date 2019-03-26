@@ -1,0 +1,19 @@
+{
+  "name": "Begin",
+  "version": "1.0.0",
+  "description": "server node js",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "1"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "mysql": "^2.16.0"
+  }
+}
